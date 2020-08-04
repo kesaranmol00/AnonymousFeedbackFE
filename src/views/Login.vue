@@ -58,6 +58,8 @@ export default {
                     document.cookie = "Token=" + login_id + ";" + expires + ";path=/";
                     //window.location.href = 'http://localhost:8080/Home'
                     this.$router.push('home')
+                    $("#nav").addClass('d-none')      
+                    $("#loggedin").removeClass('d-none')
                     //window.location.href = 'https://kesaranmol00.github.io/AnonymousFeedbackFE/Home'
                  }
                 })
@@ -73,6 +75,8 @@ export default {
        if(document.cookie != '')
        {
            this.$router.push('home')
+            $("#nav").addClass('d-none')      
+            $("#loggedin").removeClass('d-none')
          //window.location.href = 'http://localhost:8080/Home'
         // window.location.href = 'https://kesaranmol00.github.io/AnonymousFeedbackFE/Home'
        }

@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 import axios from 'axios'
 import Feedback from './Feedback.vue'
 export default {
@@ -40,7 +41,9 @@ export default {
    }
    else{
       alert("Please login again")
-      this.$router.push('login')
+      this.$router.push('')      
+        $("#nav").removeClass('d-none')      
+        $("#loggedin").addClass('d-none')
      // window.location.href = 'http://localhost:8080'
      // window.location.href = 'https://kesaranmol00.github.io/AnonymousFeedbackFE/'
    }
