@@ -57,9 +57,10 @@ export default {
                     let expires = "expires=" + d.toUTCString();
                     document.cookie = "Token=" + login_id + ";" + expires + ";path=/";
                     //window.location.href = 'http://localhost:8080/Home'
-                    this.$router.push('home')
+                    
                     $("#nav").addClass('d-none')      
                     $("#loggedin").removeClass('d-none')
+                    this.$router.push('home')
                     //window.location.href = 'https://kesaranmol00.github.io/AnonymousFeedbackFE/Home'
                  }
                 })
@@ -74,9 +75,9 @@ export default {
     mounted : function(){
        if(document.cookie != '')
        {
-           this.$router.push('home')
             $("#nav").addClass('d-none')      
             $("#loggedin").removeClass('d-none')
+            this.$router.push('home')
          //window.location.href = 'http://localhost:8080/Home'
         // window.location.href = 'https://kesaranmol00.github.io/AnonymousFeedbackFE/Home'
        }

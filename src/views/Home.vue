@@ -40,10 +40,11 @@ export default {
       })
    }
    else{
+      $("#nav").removeClass('d-none')      
+      $("#loggedin").addClass('d-none')
       alert("Please login again")
-      this.$router.push('')      
-        $("#nav").removeClass('d-none')      
-        $("#loggedin").addClass('d-none')
+      this.$router.push('/')      
+       
      // window.location.href = 'http://localhost:8080'
      // window.location.href = 'https://kesaranmol00.github.io/AnonymousFeedbackFE/'
    }
