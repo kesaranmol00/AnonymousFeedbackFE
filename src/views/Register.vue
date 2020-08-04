@@ -65,13 +65,7 @@ export default {
                 return false;                
             }
             else{
-                axios.get('UserManagement/checkUserId/'+  this.user_id
-                // , {
-                // params: {
-                //     userid:user_id,
-                // }
-                // }
-                )
+                axios.get('UserManagement/checkUserId/'+  this.user_id)
                 .then(response => {(this.response = response.data)
                 console.log(response)
                 // alert(response.data)

@@ -40,7 +40,8 @@ export default {
    }
    else{
       alert("Please login again")
-      window.location.href = 'http://localhost:8080'
+      //window.location.href = 'http://localhost:8080'
+      window.location.href = 'https://kesaranmol00.github.io/AnonymousFeedbackFE/'
    }
   }
 }
