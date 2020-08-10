@@ -1,20 +1,31 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Login</router-link> |
-      <router-link to="/register">Register</router-link>
+     <UnAuthHeader/>
     </div>
     <div id="loggedin">
-      <router-link to="/home">Home</router-link> |
-      <router-link to="/about">About</router-link>      
+     <AuthHeader/>
     </div>
+    <AddFeedback class="d-none"/>
     <router-view/>
+    <Footer/>
+    
   </div>
 </template>
 
 <script>
 import $ from 'jquery'
+import AuthHeader from './components/AuthHeader.vue'
+import UnAuthHeader from './components/UnAuthHeader.vue'
+import Footer from './components/Footer.vue'
+import AddFeedback from './views/AddFeedback.vue'
 export default {
+  components :{
+    AuthHeader,
+    UnAuthHeader,
+    Footer,
+    AddFeedback
+  },
   mounted : function(){
     if(document.cookie != '')
     {
@@ -27,16 +38,38 @@ export default {
 }
 </script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+body{
+  margin: 0 !important;
+  /* background-color: #036266 !important; */
+  /* background: url('./assets/banner.jpg');
+  background-repeat: no-repeat;
+  background-size: contain, cover;
+  background-size: 100%; */
+
+}
+#app {  
+    font-family: 'gotham rounded', 'open-sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  /* color: #2c3e50;
+  background-color: #036266; */
+  
 }
-
+.unauth{
+  /* background:#fff; */
+  /* padding: 20px;
+  border-radius: 10px 0 0 10px;
+  float: right;
+  width:30%;
+  box-shadow: 0 0px 30px 10px #272727;
+  height: auto; */
+  /* width:60% !important; */  
+}
 #nav {
-  padding: 30px;
+  /* padding: 30px;
+ text-align: right;
+ padding-top: 10%; */
 }
 
 #nav a {
@@ -47,10 +80,13 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-.d-none{
+/* .d-none{
   display: none;
-}
+} */
 .required{
-  color: red;
+  color: yellowgreen;
+}
+.row label{
+  color: #42b983
 }
 </style>

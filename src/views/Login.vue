@@ -1,14 +1,25 @@
 <template>
 <div>
-   <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input id="login-name" type="text" placeholder="Enter Username" name="uname" required>
-    <span class="required d-none" id="l-error">*Please enter login name</span>
-
-    <label for="psw"><b>Password</b></label>
-    <input id="password" type="password" placeholder="Enter Password" name="psw" required>
-    <span class="required d-none" id="p-error">*Please enter password</span>
-    <button @click="checkCredentials()" type="submit">Login</button>
+   <div class="unauth">
+    <div class="row">
+        <label class="col-4" for="uname"><b>Username *: </b></label>
+        <input class="col-8" id="login-name" type="text" placeholder="Enter Username" name="uname" required>
+    </div>
+    <div>
+        <div class="col-4"></div>
+        <span class="col-8 required d-none" id="l-error">*Please enter login name</span>
+    </div>
+    <div class="row">
+        <label class="col-4" for="psw"><b>Password *:</b></label>
+        <input class="col-8" id="password" type="password" placeholder="Enter Password" name="psw" required>
+    </div>
+    <div>
+        <div class="col-4"></div>
+        <span class="col-8 required d-none" id="p-error">*Please enter password</span>
+    </div>
+    <div>
+        <button @click="checkCredentials()"  type="button" class="btn">Login</button>
+    </div>
     <!-- <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label> -->
@@ -85,14 +96,14 @@ export default {
 }
 </script>
 <style scoped>
-.container {
-  margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  padding: 10px;
+.row label{
+    text-align: right;
 }
-.container label,.container input, .container button{
-    display: block;
-    
+.row{
+    padding:10px;
+}
+.btn {
+    color: #fff;
+    background-color: #42b983;
 }
 </style>

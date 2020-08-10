@@ -29,15 +29,23 @@ export default {
     if( token !="")
     {
       token = token.split("=")[1]
-      axios.get('Feedback/getFeedback/'+ token)
-      .then(response => {(this.response = response.data)
-        console.log(response.data)
-        this.feedbacks = response.data
-      })
-      .catch(error => {
-        console.log(error)
-        this.errored = true
-      })
+      if(token != ''){
+        axios.get('Feedback/getFeedback/'+ token)
+        .then(response => {(this.response = response.data)
+          console.log(response.data)
+          this.feedbacks = response.data
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+      }
+      else{
+         $("#nav").removeClass('d-none')      
+        $("#loggedin").addClass('d-none')
+        alert("Please login again")
+        this.$router.push('/') 
+      }
    }
    else{
       $("#nav").removeClass('d-none')      
