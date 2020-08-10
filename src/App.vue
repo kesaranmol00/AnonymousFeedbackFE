@@ -34,6 +34,7 @@ export default {
     else{
       $("#loggedin").addClass('d-none')
     }
+    console.log(window.location.href)
   }
 }
 </script>

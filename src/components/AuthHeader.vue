@@ -13,7 +13,7 @@ export default {
         DeleteCookie() {
             let token = document.cookie;
             if(confirm("Are you sure you want to log out ?")){
-                document.cookie=token+";max-age=0";
+                document.cookie=token+";max-age=0"
                 $("#nav").removeClass('d-none')      
                 $("#loggedin").addClass('d-none')
                 this.$router.push('/')
