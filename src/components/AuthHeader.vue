@@ -11,10 +11,10 @@ import $ from 'jquery'
 export default {
     methods :{
         DeleteCookie() {
-            var token = document.cookie;
+            // var token = document.cookie;
             if(confirm("Are you sure you want to log out ?")){
 
-                document.cookie=token+";max-age=0"
+                document.cookie=document.cookie+";max-age=0"
 
                 $("#nav").removeClass('d-none')      
                 $("#loggedin").addClass('d-none')
