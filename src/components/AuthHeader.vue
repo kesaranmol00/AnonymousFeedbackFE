@@ -11,9 +11,11 @@ import $ from 'jquery'
 export default {
     methods :{
         DeleteCookie() {
-            let token = document.cookie;
+            var token = document.cookie;
             if(confirm("Are you sure you want to log out ?")){
+
                 document.cookie=token+";max-age=0"
+
                 $("#nav").removeClass('d-none')      
                 $("#loggedin").addClass('d-none')
                 this.$router.push('/')
