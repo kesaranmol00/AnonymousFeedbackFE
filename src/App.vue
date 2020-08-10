@@ -6,7 +6,7 @@
     <div id="loggedin">
      <AuthHeader/>
     </div>
-    <AddFeedback class="d-none"/>
+    
     <router-view/>
     <Footer/>
     
@@ -18,13 +18,11 @@ import $ from 'jquery'
 import AuthHeader from './components/AuthHeader.vue'
 import UnAuthHeader from './components/UnAuthHeader.vue'
 import Footer from './components/Footer.vue'
-import AddFeedback from './views/AddFeedback.vue'
 export default {
   components :{
     AuthHeader,
     UnAuthHeader,
-    Footer,
-    AddFeedback
+    Footer
   },
   mounted : function(){
     if(document.cookie != '')
