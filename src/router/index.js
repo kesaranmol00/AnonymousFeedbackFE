@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
+import VueCookies from 'vue-cookies'
 
+Vue.use(VueCookies)
 Vue.use(VueRouter)
 
   const routes = [

@@ -8,13 +8,13 @@
 
 <script>
 import $ from 'jquery'
+//import VueCookies from 'vue-cookies'
 export default {
     methods :{
         DeleteCookie() {
             if(confirm("Are you sure you want to log out ?")){
-                console.log(document.cookie)
-                document.cookie = document.cookie+";max-age=0;"
-                console.log(document.cookie)
+                
+                this.$cookies.remove("token");
                 $("#nav").removeClass('d-none')      
                 $("#loggedin").addClass('d-none')
                 this.$router.push('/')

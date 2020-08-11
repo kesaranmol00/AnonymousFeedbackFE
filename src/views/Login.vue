@@ -63,12 +63,12 @@ export default {
                  alert(response.data)
                  if(response.data == true)
                  {
-                    let d = new Date();
-                    d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
-                    let expires = "expires=" + d.toUTCString();
-                    document.cookie = "Token=" + login_id + ";" + expires + ";path=/";
+                    //let d = new Date();
+                    //d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
+                   // let expires = "expires=" + d.toUTCString();
+                   // document.cookie = "Token=" + login_id + ";" + expires + ";path=/";
                     //window.location.href = 'http://localhost:8080/Home'
-                    
+                    this.$cookies.set("token",login_id,60 * 60 * 24 * 30);
                     $("#nav").addClass('d-none')      
                     $("#loggedin").removeClass('d-none')
                     this.$router.push('home')
