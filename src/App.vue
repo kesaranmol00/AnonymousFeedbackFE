@@ -5,11 +5,10 @@
     </div>
     <div id="loggedin">
      <AuthHeader/>
-    </div>
-    
-    <router-view/>
+    </div>      
+      <router-view/>   
     <Footer/>
-    
+    <div class="loader"></div>
   </div>
 </template>
 
@@ -24,6 +23,11 @@ export default {
     UnAuthHeader,
     Footer
   },
+  data() {
+        return{    
+        mobileView : true,        
+        }
+    },
   mounted : function(){
     if(document.cookie != '')
     {
@@ -32,59 +36,96 @@ export default {
     else{
       $("#loggedin").addClass('d-none')
     }
-  }
+  },
+  methods:{
+        handleView() {
+        this.mobileView = window.innerWidth <=425;
+        },
+  },
+  created(){
+        this.handleView();  
+    }
 }
 </script>
 <style>
-body{
-  margin: 0 !important;
-  /* background-color: #036266 !important; */
-  /* background: url('./assets/banner.jpg');
-  background-repeat: no-repeat;
-  background-size: contain, cover;
-  background-size: 100%; */
 
-}
 #app {  
     font-family: 'gotham rounded', 'open-sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* color: #2c3e50;
-  background-color: #036266; */
-  
+  /* background-color: #edf4f2 ; */
+}
+.header, .footer{
+  /* background-color: #63b7af; */
+  background-color: #138496;
+  height: 50px;
+}
+.header{
+  font-size: 30px;
 }
 .unauth{
-  /* background:#fff; */
-  /* padding: 20px;
-  border-radius: 10px 0 0 10px;
-  float: right;
-  width:30%;
-  box-shadow: 0 0px 30px 10px #272727;
-  height: auto; */
-  /* width:60% !important; */  
+  margin : 2% 30%;
+  border-radius: 10px;
+  min-height : 76.5vh; 
 }
-#nav {
-  /* padding: 30px;
- text-align: right;
- padding-top: 10%; */
+.auth, .unauth{
+  padding:20px;
 }
-
+.auth{
+  min-height: 84.8vh;
+}
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #3b6978;  
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #204051;
 }
-/* .d-none{
+.loader  { 
+  background: white url('./assets/loader.gif') center center no-repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: none;
-} */
-.required{
-  color: yellowgreen;
+  top:0;
+  opacity: 0.5;
 }
-.row label{
-  color: #42b983
+form{
+      padding: 1.2rem;      
+  }
+@media only screen and (min-width: 800px) {
+    .unauth,.about{
+      margin : 2% 30% !important;
+    }
+}
+@media only screen and (max-width: 800px) and (min-width: 426px) {
+    .unauth,.about{
+      margin : 2% 18% !important;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .unauth,.about{
+      margin : 2% 10% !important;
+    }    
+  form{
+      padding: 3rem 1rem 1rem 1rem !important;      
+  }
+  .footer .media-icon span{
+    display: block
+  }
+  .footer{
+    height: 95px;
+  }
+  .p-alert{
+    padding-left: 1rem !important;
+  }
+}
+    @media only screen and (max-width: 375px) {
+    .unauth,.about{
+      margin : 0 5% !important;
+    }
 }
 </style>

@@ -1,8 +1,9 @@
 <template>
-  <div class="home">
+  <div class="home auth">
+    
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <div v-for="feedback in feedbacks" :key="feedback.key">      
-      <Feedback id="feedback" v-bind:feedback ="feedback" />
+    <div class="feedback-container" v-for="feedback in feedbacks" :key="feedback.key">      
+      <Feedback class="feedback" v-bind:feedback ="feedback" />
     </div>
   </div>
 </template>
@@ -27,17 +28,20 @@ export default {
   mounted : function(){
     let token = document.cookie;
     if( token !="")
-    {
+    {     
       token = token.split("=")[1]
       if(token != ''){
+        $(".loader").show()
         axios.get('Feedback/getFeedback/'+ token)
         .then(response => {(this.response = response.data)
           console.log(response.data)
           this.feedbacks = response.data
+          $(".loader").hide()
         })
         .catch(error => {
           console.log(error)
           this.errored = true
+          $(".loader").hide()
         })
       }
       else{
@@ -61,7 +65,14 @@ export default {
 </script>
 
 <style scoped>
-#feedback{
-  border: 1px solid black;
+/* .feedback{
+  border: 1px dotted black;   
+  padding: 10px;  
+  margin: 10px;
+  border-radius: 5px;
 }
+.feedback-container{
+  display: inline;
+ 
+} */
 </style>

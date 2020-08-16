@@ -1,30 +1,42 @@
 <template>
-  <div>
-    <h1>Create a New Account</h1>
-    <form @submit="checkForm">
-      <label for="first name">First Name:</label>
-      <input type="text" v-model="firstName" required>
-      <br>
-      <label for="last name">Last Name:</label>
-      <input type="text" v-model="lastName" required>
-      <br>
-      <label for="userid">User Id:</label>
-      <input type="text" v-model="userid" required>
-      <span v-if="msg.userid">{{msg.userid}}</span>
-      <br>
-      <label for="phonenum">Phone number:</label>
-      <input type="text" v-model="phonenum" @keypress="isNumber($event)" maxlength = "10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-      <span v-if="msg.userid">{{msg.phonenum}}</span>
-      <br>
-      <label for="email">Email Address:</label>
-      <input type="text" v-model="email" required> <br>
-      <span v-if="msg.email">{{msg.email}}</span>
+  <div class="unauth">
+    <h3 class="h4 mb-4">Sign up</h3>
+    <form @submit="checkForm" class="text-center border border-light" > 
 
-      <label for="password">Password:</label>
-      <input type="password" v-model="password" required><br>
-      <span v-if="msg.password">{{msg.password}}</span>
-      <br>
-       <input type="submit" value="Submit">
+ <div class="form-row mb-4">
+        <div class="col">
+            <!-- First name -->
+            <input v-model="firstName" required type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+        </div>
+        <div class="col">
+            <!-- Last name -->
+            <input v-model="lastName" required type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+        </div>
+    </div>
+    <!-- Phone number -->
+    <input type="text" class="form-control  mt-4" placeholder="Phone number" v-model="phonenum" @keypress="isNumber($event)" maxlength = "10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+    <!--User id -->
+    <input v-model="userid" required  type="text"  class=" mt-4 form-control" placeholder="User name">
+    <!-- <span v-if="msg.userid">{{msg.userid}}</span> -->
+    <small v-if="msg.userid"  role="alert" class="alert alert-danger form-text text-muted mb-4">
+       {{msg.userid}}
+    </small>
+     <!-- E-mail -->
+    <input v-model="email" required type="email"  class="form-control mt-4" placeholder="E-mail">
+    <!-- <span v-if="msg.email">{{msg.email}}</span> -->
+    <small v-if="msg.email"  role="alert" class="alert alert-danger form-text text-muted mb-4">
+       {{msg.email}}
+    </small>
+    <!-- Password -->
+    <input v-model="password" required type="password" id="defaultRegisterFormPassword" class="mt-4 form-control" placeholder="Password">
+    <!-- <span v-if="msg.password">{{msg.password}}</span> -->
+    <small v-if="msg.password" role="alert" class="p-alert alert alert-danger form-text text-muted mb-4">
+      <li v-for="message in msg.password" :key="message.id">         
+           {{message}}         
+       </li>
+    </small>
+
+       <input type="submit" value="Submit" class="btn btn-info my-4 btn-block">
     </form>
 
   </div>
@@ -32,6 +44,7 @@
 
 <script>
 import axios from 'axios'
+import $ from 'jquery'
 export default {
   data(){
     return {
@@ -42,6 +55,12 @@ export default {
         phonenum:null,
         userid:null,      
         msg: [],
+         rules: [
+				{ message:'One lowercase letter required.', regex:/[a-z]+/ },
+				{ message:"One uppercase letter required.",  regex:/[A-Z]+/ },
+				{ message:"8 characters minimum.", regex:/.{8,}/ },
+				{ message:"One number required.", regex:/[0-9]+/ }
+			],
     }
   },
   watch: {
@@ -70,12 +89,17 @@ export default {
         } 
     },
     validatePassword(value){
-      let difference = 8 - value.length;
-      if (value.length<8) {
-        this.msg['password'] = 'Must be 8 characters! '+ difference + ' characters left' ;
-      } else {
-         this.msg['password'] = '';
+       let errors = []
+      for (let condition of this.rules) {
+				if (!condition.regex.test(value)) {
+					errors.push(condition.message)
+        }
       }
+      if (errors.length === 0) {
+				this.msg['password'] = ''
+			} else {
+				this.msg['password'] = errors
+			}
     },
     checkForm :function(e){
        e.preventDefault();
@@ -85,7 +109,7 @@ export default {
        if(!this.password || this.msg['password'].length > 0) return false;
        if(!this.userid || this.msg['userid'].length >0) 
        return false
-       
+       $(".loader").show()
         axios.get('UserManagement/registerUser',{
                     params: {
                         firstname:this.firstName,
@@ -98,6 +122,7 @@ export default {
                 })
                 .then(response => {(response = response.data)
                 console.log(response)
+                $(".loader").hide()
                 // alert(response.data)
                 if(response == true)
                 {
@@ -116,13 +141,14 @@ export default {
        
     },
     IsUserIdValid(){
-         axios.get('UserManagement/checkUserId/'+  this.userid)
+        axios.get('UserManagement/checkUserId/'+  this.userid)
                 .then(response => {(this.response = response.data)
-                console.log(response)
+               // console.log(response)
                 // alert(response.data)
                 if(response.data == false)
                     {
-                        this.msg['userid'] = 'user id already exists. Please try another.'                        
+                        this.msg['userid'] = 'user id already exists. Please try another.'   
+                       // alert("user id already exists. please try another")                     
                     }
                     else if(response.data == true)
                     {
@@ -154,25 +180,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#visa {
-  margin: 20px auto;
-  max-width: 700px;
-  margin-bottom: 28px;
+.p-alert{
+     text-align: left; 
+    padding: 0.5rem 0.25rem 0.5rem 2.5rem;
 }
-label{
-  display: block;
-  margin: 20px 0 10px;
-}
-span {
-  padding-top: 0px;
-  margin-top: 0px;
-  font-size: 12px;
-  color: red;
-}
-input {
-  font-size: 30px;
-  border: 1px double rgb(102, 97, 96) ;
-  border-radius: 4px;
-}
-
 </style>

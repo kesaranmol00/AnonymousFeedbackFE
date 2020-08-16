@@ -1,22 +1,41 @@
 <template>
-  <div class="about">
-    <h1>Update Account</h1>
-    <form @submit="checkForm">     
-      <label for="first name">First Name:</label>
-      <input type="text" v-model="firstName" required>
-      <br>
-      <label for="last name">Last Name:</label>
-      <input type="text" v-model="lastName" required>
-      <br>
-      <label for="phonenum">Phone number:</label>
-      <input type="text" v-model="phonenum" @keypress="isNumber($event)" maxlength = "10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
-      <span v-if="msg.userid">{{msg.phonenum}}</span>
-      <br>
-      <label for="password">Password:</label>
-      <input type="password" v-model="password" required><br>
-      <span v-if="msg.password">{{msg.password}}</span>
-      <br>
-       <input type="submit" value="Submit">
+  <div class="about auth">
+     <!-- <h3 class="h4 mb-4">Update Account</h3> -->
+     <h3>Update Account</h3>
+    <form @submit="checkForm" class="text-center border border-light p-3">
+
+      <div class="form-row mb-4">
+        <div class="col">
+            <!-- First name -->
+            <input v-model="firstName" required type="text" class="form-control" placeholder="First name">
+        </div>
+        <div class="col">
+            <!-- Last name -->
+            <input v-model="lastName" required type="text" class="form-control" placeholder="Last name">
+        </div>
+      </div>
+      <!-- User Id -->
+    <input type="text" class="form-control  mt-4" placeholder="User Id" v-model="userid" disabled>
+     <!-- User email id -->
+    <input type="text" class="form-control  mt-4" placeholder="Email id" v-model="emailid" disabled>
+       <!-- Phone number -->
+    <input type="text" class="form-control  mt-4" placeholder="Phone number" v-model="phonenum" @keypress="isNumber($event)" maxlength = "10" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+
+    <!--Old Passowrd -->
+    <input v-model="oldPassword" required type="password" class="mt-4 form-control" placeholder="Old Password">
+      <small v-if="msg.oldpassword" role="alert" class="alert alert-danger form-text text-muted mb-4">                
+            {{msg.oldpassword}}  
+      </small>
+
+    <!--New  Password -->
+    <input v-model="password" required type="password" class="mt-4 form-control" placeholder="New Password">
+    <small v-if="msg.password" role="alert" class="p-alert alert alert-danger form-text text-muted mb-4">
+       <li v-for="message in msg.password" :key="message.id">         
+           {{message}}         
+       </li>
+    </small>
+
+       <input type="submit" value="Submit" class="btn btn-info my-4 btn-block">
     </form>
 
   </div>
@@ -32,7 +51,15 @@ export default {
         password:null,
         phonenum:null,    
         userid :null,
+        emailid :null,
+        oldPassword : null,
         msg: [],
+        rules: [
+				{ message:'One lowercase letter required.', regex:/[a-z]+/ },
+				{ message:"One uppercase letter required.",  regex:/[A-Z]+/ },
+				{ message:"8 characters minimum.", regex:/.{8,}/ },
+				{ message:"One number required.", regex:/[0-9]+/ }
+			],
     }
   },
    watch: {
@@ -52,42 +79,52 @@ export default {
       }
     },
      validatePassword(value){
-      let difference = 8 - value.length;
-      if (value.length<8) {
-        this.msg['password'] = 'Must be 8 characters! '+ difference + ' characters left' ;
-      } else {
-         this.msg['password'] = '';
+      let errors = []
+      for (let condition of this.rules) {
+				if (!condition.regex.test(value)) {
+					errors.push(condition.message)
+        }
       }
+      if (errors.length === 0) {
+				this.msg['password'] = ''
+			} else {
+				this.msg['password'] = errors
+			}
     },
      checkForm :function(e){
        e.preventDefault();
        if(!this.firstName) return false;
        if(!this.lastName) return false;
        if(!this.password || this.msg['password'].length > 0) return false;
-      
+       $(".loader").show()
         axios.get('UserManagement/updateUser',{
                     params: {
                         firstname:this.firstName,
                         lastname:this.lastName,
                         password:this.password,                       
                         phonenumber:this.phonenum,
-                        userid : this.userid
+                        userid : this.userid,
+                        oldPassword : this.oldPassword
                     }
                 })
                 .then(response => {(response = response.data)
                 console.log(response)
+                 $(".loader").hide()
                 // alert(response.data)
                 if(response == true)
                 {
                     alert("Updated sucessfully..!!")
+                    this.$router.push('/home')
                 }
                 else {
-                    console.log(response)
-                    alert("something went wrong. Please try again after some time")
+                    this.msg['oldpassword'] = response
+                     $("#oldpassword").load(window.location.href + "#oldpassword" );
                 }
                 })
                 .catch(error => {
                     console.log(error)
+                    alert("something went wrong. Please try again after some time")
+                    $(".loader").hide()
                     this.errored = true
                 })
      }
@@ -98,16 +135,20 @@ export default {
     {
       token = token.split("=")[1]
       this.userid = token
+      $(".loader").show()
       axios.get('UserManagement/getUser/'+ token)
       .then(response => {(this.response = response.data)
-        console.log(response.data)
+        // console.log(response.data)
         this.firstName = response.data.FirstName
         this.lastName = response.data.LastName
         this.phonenum = response.data.PhoneNumber
+        this.emailid = response.data.EmailId
+        $(".loader").hide()
       })
       .catch(error => {
         console.log(error)
         this.errored = true
+        $(".loader").hide()
       })
    }
    else{
@@ -120,19 +161,14 @@ export default {
 }
 </script>
 <style scoped>
-label{
-  display: block;
-  margin: 20px 0 10px;
+.about{
+   margin : 0 30%;
+  border-radius: 10px;
+  /* height: 84.8vh; */
 }
-span {
-  padding-top: 0px;
-  margin-top: 0px;
-  font-size: 12px;
-  color: red;
+.p-alert{
+     text-align: left; 
+    padding: 0.5rem 0.25rem 0.5rem 2.5rem;
 }
-input {
-  font-size: 30px;
-  border: 1px double rgb(102, 97, 96) ;
-  border-radius: 4px;
-}
+
 </style>
