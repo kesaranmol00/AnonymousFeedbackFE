@@ -90,8 +90,8 @@ export default {
      // window.location.href = 'https://kesaranmol00.github.io/AnonymousFeedbackFE/'
    }
 
-    this.inputtxt = "http://localhost:8080/#/addfeedback/" + window.hostname
-    // this.inputtxt = "https://kesaranmol00.github.io/AnonymousFeedbackFE/#/addfeedback/" +window.hostname
+   // this.inputtxt = "http://localhost:8080/#/addfeedback/" + window.hostname
+   this.inputtxt = "https://kesaranmol00.github.io/AnonymousFeedbackFE/#/addfeedback/" +window.hostname
   //  var inputtext = "https://kesaranmol00.github.io/AnonymousFeedbackFE/#/addfeedback/" +this.token
   //  $("#myInput").value = inputtext
   }
