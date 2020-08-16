@@ -54,11 +54,14 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* background-color: #edf4f2 ; */
+background: #3A1C71;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 .header, .footer{
   /* background-color: #63b7af; */
-  background-color: #138496;
+  /* background-color: #138496; */
   height: 50px;
 }
 .header{
@@ -94,6 +97,10 @@ export default {
 }
 form{
       padding: 1.2rem;      
+  }
+  .btn{
+    background-color: #613073 !important;
+    
   }
 @media only screen and (min-width: 800px) {
     .unauth,.about{

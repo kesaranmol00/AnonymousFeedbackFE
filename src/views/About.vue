@@ -1,9 +1,9 @@
 <template>
   <div class="about auth">
      <!-- <h3 class="h4 mb-4">Update Account</h3> -->
-     <h3>Update Account</h3>
-    <form @submit="checkForm" class="text-center border border-light p-3">
-
+     <!-- <h3>Update Account</h3> -->
+    <form @submit="checkForm" class="text-center shadow-lg p-3 mb-5 bg-white rounded">
+      <h3 class="h4 mb-4 ">Update Account</h3>
       <div class="form-row mb-4">
         <div class="col">
             <!-- First name -->
@@ -117,8 +117,8 @@ export default {
                     this.$router.push('/home')
                 }
                 else {
-                    this.msg['oldpassword'] = response
-                     $("#oldpassword").load(window.location.href + "#oldpassword" );
+                    //this.msg['oldpassword'] = response
+                     alert(response);
                 }
                 })
                 .catch(error => {
@@ -142,7 +142,8 @@ export default {
         this.firstName = response.data.FirstName
         this.lastName = response.data.LastName
         this.phonenum = response.data.PhoneNumber
-        this.emailid = response.data.EmailId
+        this.emailid = response.data.EmailId,
+        this.userid = response.data.UserId
         $(".loader").hide()
       })
       .catch(error => {

@@ -1,12 +1,16 @@
 <template>
 <div class="unauth">
- <form id="login" @submit="checkCredentials" class="border border-light">
+ <!-- <form id="login" @submit="checkCredentials" class="border border-light"> -->
+    <form id="login" @submit="checkCredentials" class="shadow-lg p-3 mb-5 bg-white rounded">
+        <h2 class="h4 mb-4">Enter Credentials</h2>
      <!--User name-->
-      <h4 class="text-left"><span class="label label-default">Username :</span></h4>
+     <p class="text-left m-0">Username</p>
+      <!-- <h3 class="text-left"><span class="label label-default">Username :</span></h3> -->
       <input id="defaultLoginFormEmail" class="form-control mb-4 "  type="text" v-model="userid"  placeholder="Enter Username"  required>      
       
       <!--User name-->
-      <h4 class="text-left"><span class="label label-default">Password :</span></h4>
+      <p class="text-left m-0">Password</p>
+      <!-- <h3 class="text-left"><span class="label label-default">Password :</span></h3> -->
       <input id="defaultLoginFormPassword" class="form-control mb-4" type="password" v-model="password"  placeholder="Enter Password"  required><br>
       
       <!--Button-->
@@ -51,18 +55,23 @@ export default {
                 })
                 .then(response => {(this.response = response.data)
                 console.log(response)
-                 alert(response.data)
+               //  alert(response.data)
                  $(".loader").hide()
-                 if(response.data == true)
+                 if(response.data.Result == "true")
                  {                    
-                    this.$cookies.set("token",this.userid,60 * 60 * 24 * 30);
+                    this.$cookies.set("token",response.data.value,60 * 60 * 24 * 30);
                     $("#nav").addClass('d-none')      
                     $("#loggedin").removeClass('d-none')
-                    this.$router.push('home')
-                    
+                    this.$router.push('home')      
+                    window.hostname = this.userid              
+                 }
+                 else if(response.data.Result == "false"){
+                     alert(response.data.value);
                  }
                 })
                 .catch(error => {
+                    $(".loader").hide()
+                    alert("Something went wrong..!!!")
                     console.log(error)
                     this.errored = true
                 })

@@ -1,13 +1,14 @@
 <template>
-    <div class="unauth">       
+    <div class="unauth">    
+        <form class="shadow-lg p-3 mb-5 bg-white rounded">   
                 <p class="alert alert-danger form-text text-muted mb-4 d-none">{{this.message}}</p>
-            
             <div class="content">
                 <!-- <input v-model="comment" required type="text"  class="form-control mt-4" placeholder="Add comment..."> -->
                 <h3><span class="label label-default">Add Feedback</span></h3>
                 <textarea v-model="comment" required type="text"  class="comment form-control mt-4" placeholder="Start writing..."></textarea> 
                 <button  class="btn btn-info my-4 btn-block" @click="SaveFeedback()"> Send </button>
             </div>        
+        </form>
     </div>    
 </template>
 
@@ -39,6 +40,7 @@ export default {
                 })
                 .then(response => {(this.response = response.data)
                 this.message = response.data
+                alert(response.data)
                   $(".loader").hide()
                   $(".alert").removeClass("d-none")
                 })
@@ -54,12 +56,12 @@ export default {
     if( token !="")
     {
       $(".loader").show()
-      axios.get('UserManagement/getUser/'+ token)
+      axios.get('UserManagement/checkUserId/'+ token)
       .then(response => {(this.response = response.data)        
-        this.firstName = response.data.FirstName
-        this.lastName = response.data.LastName
+        // this.firstName = response.data.FirstName
+        // this.lastName = response.data.LastName
         console.log(response)
-        if(response.data == "")
+        if(response.data == true)
         {
             $(".comment").attr('disabled',true);
             $(".btn").attr('disabled',true);

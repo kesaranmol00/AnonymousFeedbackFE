@@ -1,8 +1,9 @@
 <template>
   <div class="unauth">
-    <h3 class="h4 mb-4">Sign up</h3>
-    <form @submit="checkForm" class="text-center border border-light" > 
-
+    
+    <!-- <form @submit="checkForm" class="text-center border border-light" >  -->
+<form @submit="checkForm" class="text-center shadow-lg p-3 bg-white rounded" > 
+  <h3 class="h4 mb-4 ">Sign up</h3>
  <div class="form-row mb-4">
         <div class="col">
             <!-- First name -->
@@ -147,7 +148,9 @@ export default {
                 // alert(response.data)
                 if(response.data == false)
                     {
-                        this.msg['userid'] = 'user id already exists. Please try another.'   
+                        this.msg['userid'] = 'user id already exists. Please try another.'  
+                        var alertmsg = this.userid + "already exists. Please try other"
+                        alert(alertmsg) 
                        // alert("user id already exists. please try another")                     
                     }
                     else if(response.data == true)
