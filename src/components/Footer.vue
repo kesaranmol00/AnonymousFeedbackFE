@@ -2,7 +2,7 @@
     <div class="footer">
       
         <div class="media-icon">
-            <span> For any query or complain, or want to know more about me <i class="arrow right"></i>  </span>
+            <!-- <span> For any query or complain, or want to know more about me <i class="arrow right"></i>  </span> -->
             <a href="mailto:anmolkesar24@gmail.com"><img class="social-media-icon" alt="img" src="../assets/emailme.png"></a>
             <a href="https://www.instagram.com/anmolkesar/" target="_blank"><img class="social-media-icon" alt="img" src="../assets/instagram.png"></a>
             <a href="https://www.linkedin.com/in/anmol-kesar-12872694/" target="_blank"><img class="social-media-icon" alt="img" src="../assets/linkedin.png"></a>
@@ -16,7 +16,7 @@
 .social-media-icon{
     height: 40px;
     width: 50px;
-    padding: 7px 10px 0;
+    padding: 0px 7px 6px;
 }
 .media-icon span{
     color: white;

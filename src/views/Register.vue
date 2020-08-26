@@ -38,6 +38,9 @@
     </small>
 
        <input type="submit" value="Submit" class="btn btn-info my-4 btn-block">
+       <label>
+         Already have an account <router-link to="/">Log in</router-link>
+       </label>
     </form>
 
   </div>
@@ -186,5 +189,8 @@ export default {
 .p-alert{
      text-align: left; 
     padding: 0.5rem 0.25rem 0.5rem 2.5rem;
+}
+form{
+  margin-top: 8%;
 }
 </style>

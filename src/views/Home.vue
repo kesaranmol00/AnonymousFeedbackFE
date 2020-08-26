@@ -1,6 +1,6 @@
 <template>
   <div class="home auth">
-    <form class="shadow-lg p-3 mb-5 bg-white rounded">
+    <form class="shadow-lg p-3 m-2 bg-white rounded">
       <span class="feedback-info d-block"> Share the link to your friends and family to get some interseting feedbacks about you</span>
       <input type="text" class="feedback-link mr-4" v-model="inputtxt"  id="myInput" readonly>
 
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div v-else>
-      <div class="shadow-lg p-3 m-2 bg-white rounded"> 
+      <div class="shadow-lg p-3 mb-2 mb-5 mr-5 ml-5 bg-white rounded"> 
           No Record found. Please share the feedback link to your friends
       </div>
     </div>

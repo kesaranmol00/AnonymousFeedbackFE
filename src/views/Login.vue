@@ -1,21 +1,25 @@
 <template>
-<div class="unauth">
+<div class="unauth login-unauth">
  <!-- <form id="login" @submit="checkCredentials" class="border border-light"> -->
-    <form id="login" @submit="checkCredentials" class="shadow-lg p-3 mb-5 bg-white rounded">
-        <h2 class="h4 mb-4">Enter Credentials</h2>
+    <form id="login" @submit="checkCredentials" class="shadow-lg bg-white">
+        <h2 class="h4 mb-4">Login</h2>
      <!--User name-->
-     <p class="text-left m-0">Username</p>
+     <!-- <p class="text-left m-0">Username</p> -->
       <!-- <h3 class="text-left"><span class="label label-default">Username :</span></h3> -->
-      <input id="defaultLoginFormEmail" class="form-control mb-4 "  type="text" v-model="userid"  placeholder="Enter Username"  required>      
+      <input id="defaultLoginFormEmail" class="form-control mb-4 "  type="text" v-model="userid"  placeholder="Username"  required>      
       
       <!--User name-->
-      <p class="text-left m-0">Password</p>
+      <!-- <p class="text-left m-0">Password</p> -->
       <!-- <h3 class="text-left"><span class="label label-default">Password :</span></h3> -->
-      <input id="defaultLoginFormPassword" class="form-control mb-4" type="password" v-model="password"  placeholder="Enter Password"  required><br>
-      
+      <input id="defaultLoginFormPassword" class="form-control" type="password" v-model="password"  placeholder="Password"  required><br>
+      <label class="text-right">
+           <input type="checkbox" class="mr-2" value="remember-me" id="remember_me">Remember Me
+       </label>
       <!--Button-->
-       <input  class="btn btn-info btn-block my-4"  type="submit" value="Submit">
-       
+       <input  class="btn btn-info btn-block mb-4"  type="submit" value="Submit">
+       <label>
+           Don't have an account <router-link to="/register">Sign up</router-link>
+       </label>
     </form>
     
 </div>    
@@ -34,19 +38,19 @@ export default {
     },
     methods : {
         checkCredentials(){
-            // var login_id = this.userid
-            // var password = this.password
-            // if(login_id == ""){
-            //     $("#l-error").removeClass('d-none')
-            //  }
-            // else if(password == ""){
-            //     $("#p-error").removeClass('d-none')
-            // }
-            // else{
-            //      $("#l-error").addClass('d-none')
-            //       $("#p-error").addClass('d-none')
-            // $(".loader").css("display", "block");
             $(".loader").show()
+                if ($('#remember_me').is(':checked')) {
+                    // save username and password
+                    localStorage.usrname = $('#defaultLoginFormEmail').val();
+                    localStorage.pass = $('#defaultLoginFormPassword').val();
+                    //localStorage.chkbx = $('#remember_me').val();
+                } else {
+                    localStorage.usrname = '';
+                    localStorage.pass = '';
+                    //localStorage.chkbx = '';
+                }
+        
+
            axios.get('UserManagement/checkCredentials', {
                 params: {
                     loginid:this.userid,
@@ -75,10 +79,7 @@ export default {
                     console.log(error)
                     this.errored = true
                 })
-                
-                // $(".loader").css("display", "none");
-        //}
-        }
+        }   
     }
     ,
     mounted : function(){
@@ -87,6 +88,19 @@ export default {
             $("#nav").addClass('d-none')      
             $("#loggedin").removeClass('d-none')
             this.$router.push('home')
+       }
+       else{           
+            // save username and password
+            this.userid = localStorage.usrname;
+            this.password = localStorage.pass;
+            
+            $('#defaultLoginFormEmail').val(localStorage.usrname);
+            $('#defaultLoginFormPassword').val(localStorage.pass) ;
+            if(this.userid!="")
+            {
+                $('#remember_me').prop('checked', true);
+            }              
+            
        }
     }
 }
