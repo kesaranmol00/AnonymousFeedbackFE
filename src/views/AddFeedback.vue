@@ -1,6 +1,6 @@
 <template>
     <div class="unauth">    
-        <form class="shadow-lg p-3 mb-5 bg-white rounded">   
+        <form class="shadow-lg p-4 mb-5 mt-5 bg-white">   
                 <p class="alert alert-danger form-text text-muted mb-4 d-none">{{this.message}}</p>
             <div class="content">
                 <!-- <input v-model="comment" required type="text"  class="form-control mt-4" placeholder="Add comment..."> -->
@@ -43,6 +43,8 @@ export default {
                 alert(response.data)
                   $(".loader").hide()
                   $(".alert").removeClass("d-none")
+                  $('.content button').prop('disabled', true);
+                  $('.content textarea').prop('disabled', true);
                 })
                 .catch(error => {
                     console.log(error)

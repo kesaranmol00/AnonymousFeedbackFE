@@ -57,11 +57,17 @@ export default {
 background: #e68978;  /* fallback for old browsers
 #ab6075  #e68978
  background: #2193b0;  /* fallback for old browsers */
- background: -webkit-linear-gradient(to right, #e68978, #ab6075);
- background: linear-gradient(to right, #e68978, #ab6075);
-/* background: -webkit-linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);
-background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);  */
-
+ background: -webkit-linear-gradient(to bottom, #e68978, #ab6075);
+ background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+background-size: 400% 400%;
+animation: gradient 15s ease infinite;
+}
+.logout a, .btn{
+  background: #e68978;  
+   background: -webkit-linear-gradient(to bottom, #e68978, #ab6075);
+ background: linear-gradient(-45deg, #e73c7e, #23a6d5, #23d5ab,#ee7752);
+background-size: 400% 400%;
+animation: gradient 15s ease infinite;
 }
 .header, .footer{
   /* background-color: #63b7af; */
@@ -100,11 +106,12 @@ background: linear-gradient(to right, #FFAF7B, #D76D77, #3A1C71);  */
   opacity: 0.5;
 }
 form{
-      padding: 1.2rem;      
+      padding: 1.2rem;    
+       border-radius: 50px !important;  
   }
   .btn{
-    background-color: #613073 !important;
-    
+    /* background-color: #613073 !important; */
+    border-radius: 30px !important;
   }
   .login-unauth form{
     border: 1px solid #727272;
@@ -113,10 +120,12 @@ form{
   form ::placeholder{
     color: red;
   }
-  .login-unauth form{
-      border-radius: 50px !important;
+  .login-unauth form{     
       padding: 30px;
       margin-top: 25%;
+    }
+    input{
+      border-radius: 15px !important;
     }
 @media only screen and (min-width: 800px) {
     .unauth,.about{
@@ -155,5 +164,17 @@ form{
     .unauth,.about{
       margin : 0 5% !important;
     }
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 </style>

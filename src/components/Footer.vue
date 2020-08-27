@@ -14,7 +14,7 @@
 </template>
 <style scoped>
 .social-media-icon{
-    height: 40px;
+    height: 42px;
     width: 50px;
     padding: 0px 7px 6px;
 }

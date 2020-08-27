@@ -110,9 +110,9 @@ export default {
    
     border-radius: 10px;
     color: #fff;
-   background: -webkit-linear-gradient(to right, #e68978, #ab6075);
+   /* background: -webkit-linear-gradient(to right, #e68978, #ab6075);
  background: linear-gradient(to right, #e68978, #ab6075);
- box-shadow: 0 1px 3px rgba(0,0,0,.4);
+ box-shadow: 0 1px 3px rgba(0,0,0,.4); */
 }
 .nav-links:first-child{    
      border-right: 1px solid #eee;

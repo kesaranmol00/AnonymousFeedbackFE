@@ -1,8 +1,8 @@
 <template>
-  <div class="unauth">
+  <div class="unauth register">
     
     <!-- <form @submit="checkForm" class="text-center border border-light" >  -->
-<form @submit="checkForm" class="text-center shadow-lg p-3 bg-white rounded" > 
+<form @submit="checkForm" class="text-center shadow-lg p-4 bg-white" > 
   <h3 class="h4 mb-4 ">Sign up</h3>
  <div class="form-row mb-4">
         <div class="col">

@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <span>
         <!-- <div v-for="feed in feedback" :key="feed.key"> -->
              <!-- {{feedback.Name}}
             {{feedback.ForUser}} -->
             {{feedback.Comment}}
         <!-- </div> -->
-    </div>
+    </span>
 </template>
 
 <script>

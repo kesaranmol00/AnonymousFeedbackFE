@@ -2,7 +2,7 @@
   <div class="about auth">
      <!-- <h3 class="h4 mb-4">Update Account</h3> -->
      <!-- <h3>Update Account</h3> -->
-    <form @submit="checkForm" class="text-center shadow-lg p-3 mb-5 bg-white rounded">
+    <form @submit="checkForm" class="text-center shadow-lg p-4 mb-5 bg-white">
       <h3 class="h4 mb-4 ">Update Account</h3>
       <div class="form-row mb-4">
         <div class="col">
