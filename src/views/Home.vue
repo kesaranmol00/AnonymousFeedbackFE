@@ -104,7 +104,7 @@ export default {
    }
 
    // this.inputtxt = "http://localhost:8080/#/addfeedback/" + window.hostname
-   this.inputtxt = "https://kesaranmol00.github.io/AnonymousFeedbackFE/#/addfeedback/" +window.hostname
+   this.inputtxt = "https://kesaranmol00.github.io/AnonymousFeedbackFE/#/addfeedback/" +localStorage.usrname 
   //  var inputtext = "https://kesaranmol00.github.io/AnonymousFeedbackFE/#/addfeedback/" +this.token
   //  $("#myInput").value = inputtext
   }
@@ -149,7 +149,8 @@ p {
   border: 4px double rgba(255, 255, 255, 0.25);
   border-width: 4px 0;
   padding: 1em 0em;
-  background: #090d00;
+  /* background: #090d00; */
+  background:#090d0085;
   color: #F0F0F0;
 }
 p span:first-child {

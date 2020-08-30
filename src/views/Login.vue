@@ -40,18 +40,12 @@ export default {
     methods : {
         checkCredentials(){
             $(".loader").show()
+                localStorage.usrname = $('#defaultLoginFormEmail').val();
                 if ($('#remember_me').is(':checked')) {
-                    // save username and password
-                    localStorage.usrname = $('#defaultLoginFormEmail').val();
                     localStorage.pass = $('#defaultLoginFormPassword').val();
-                    //localStorage.chkbx = $('#remember_me').val();
                 } else {
-                    localStorage.usrname = '';
                     localStorage.pass = '';
-                    //localStorage.chkbx = '';
                 }
-        
-
            axios.get('UserManagement/checkCredentials', {
                 params: {
                     loginid:this.userid,
@@ -100,8 +94,7 @@ export default {
             if(this.userid!="")
             {
                 $('#remember_me').prop('checked', true);
-            }              
-            
+            } 
        }
     }
 }
